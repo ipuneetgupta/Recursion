@@ -1,0 +1,31 @@
+#include <iostream>
+#include<string>
+using namespace std;
+string str;
+void COString(string res,int i){
+//base case
+if(!str[i]){
+    if(str.size()==res.size()) {
+        cout<<res;
+    }else{
+        cout<<", "<<res;
+    }
+    return ;
+}
+   string p=res+(char)((str[i]-'0')+96);
+    COString(p,i+1);
+
+    if(str[i+1]){
+        if(stoi(str.substr(i,2))<=26){
+            string q=res+(char)((stoi(str.substr(i,2)))+96);
+            COString(q,i+2);
+        }
+    }
+    return;
+}
+int main() {
+ cin>>str;
+ cout<<"[";
+ COString("",0);
+ cout<<"]";
+}

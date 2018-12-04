@@ -1,0 +1,47 @@
+#include<iostream>
+#include<iomanip>
+using namespace std;
+const int d=10;
+bool CanPlace(int board[d][d],int r,int c,int n){
+  return
+    r>=0&&r<n&&
+     c>=0&&c<n&&
+     board[r][c]==0;
+}
+bool SolveKnight(int board[d][d],int n,int CurrRow,int CurrCol,int move_no){
+  //base case
+  if(move_no==n*n) return true;
+
+  int DirRow[] = {+2, +1, -1, -2, -2, -1, +1, +2};
+    int DirCol[] = {+1, +2, +2, +1, -1, -2, -2, -1};
+  for(int Dir=0;Dir<8;Dir++){
+     int nextRow=CurrRow+DirRow[Dir];
+     int nextCol=CurrCol+DirCol[Dir];
+      if(CanPlace(board,nextRow,nextCol,n)==true){
+        board[nextRow][nextCol]=move_no+1;//assume this move is right
+        bool nextMove=SolveKnight(board,n,nextRow,nextCol,move_no+1);
+        if(nextMove==true) return true;
+        board[nextRow][nextCol]=0;//backtrack or erase previous move
+      }
+  }
+  return false;
+}
+void PrintBoard(int board[d][d],int n){
+  for(int i=0;i<n;i++){
+    for(int j=0;j<n;j++){
+      cout<<setw(3)<<board[i][j]<<" ";
+    }
+    cout<<endl;
+  }
+  return;
+}
+int main(){
+  int n;
+  cin>>n;
+  int board[d][d]={0};
+  bool ans=SolveKnight(board,n,0,0,1);
+  if(ans){
+    PrintBoard(board,n);
+  }else cout<<"sorry! Puneet";
+  return 0;
+}

@@ -1,0 +1,25 @@
+#include <iostream>
+#include<bitset>
+using namespace std;
+bitset<3000> cc,d2,d1;
+void CountNqueen(int n,int r,int &ans){
+  if(n==r){
+      ans++;
+      return;
+  }
+  for(int c=0;c<n;c++){
+    if(!cc[c]&&!d1[r-c+n-1]&&!d2[r+c]){
+        cc[c]=d1[r-c+n-1]=d2[r+c]=1;
+        CountNqueen(n,r+1,ans);
+        cc[c]=d1[r-c+n-1]=d2[r+c]=0;
+    }
+  }
+  return;
+}
+int main() {
+ int n;
+ cin>>n;
+ int ans=0;
+ CountNqueen(n,0,ans);
+ cout<<ans;
+}

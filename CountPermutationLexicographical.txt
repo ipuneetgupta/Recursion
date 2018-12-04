@@ -1,0 +1,30 @@
+#include <iostream>
+#include<vector>
+#include<algorithm>
+#include<set>
+using namespace std;
+vector<string> vec;
+void CountPermutation(char *inp,int i){
+    if(inp[i]=='\0'){
+        vec.push_back(inp);
+        return;
+    }
+    for(int j=0;j<=i;j++){
+       swap(inp[j],inp[i]);
+       CountPermutation(inp,i+1);
+       swap(inp[i],inp[j]);
+    }
+    return;
+}
+int main() {
+    char inp[10];
+    cin>>inp;
+    CountPermutation(inp,0);
+    set<string> pres;
+     for(unsigned int i=0;i<vec.size();i++){
+         pres.insert(vec[i]);
+    }
+    for(auto i=pres.begin();i!=pres.end();i++){
+        cout<<*i<<endl;
+    }
+}

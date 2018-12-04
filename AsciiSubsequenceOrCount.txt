@@ -1,0 +1,36 @@
+#include <iostream>
+#include<string>
+#include<bits/stdc++.h>
+using namespace std;
+int ascii_Count(string str,string result){
+    if(str=="") {
+        return 1;
+    }
+    char c=str[0];
+    string ros=str.substr(1);
+    int p=ascii_Count(ros,result);
+    int q=ascii_Count(ros,result+c);
+    int a=str[0];
+    int r= ascii_Count(ros,result+to_string(a));
+    return p+q+r;
+}
+void asciiSubsequence(string str,string result){
+    if(str=="") {
+        cout<<result<<" ";
+        return ;
+    }
+    char c=str[0];
+    string ros=str.substr(1);
+    asciiSubsequence(ros,result);
+    asciiSubsequence(ros,result+c);
+    int a=str[0];
+    asciiSubsequence(ros,result+to_string(a));
+    return;
+}
+int main() {
+    string str;
+    cin>>str;
+    int ans=  ascii_Count(str,"");
+    cout<<ans<<endl;
+    asciiSubsequence(str,"");
+}

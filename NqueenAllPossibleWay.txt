@@ -1,0 +1,73 @@
+#include <iostream>
+using namespace std;
+bool IsBoardSafe(int board[][10],int i,int j,int n){
+    //check the col is good for queen 
+   for(int row=0;row<i;row++){
+       if(board[row][j]==1) return false;
+   }
+   //check the left diagonal of board isit safe for queen
+   int x=i;
+   int y=j;
+   while(x>=0&&y>=0){
+       if(board[x][y]==1) return false;
+       x--;
+       y--;
+   }
+   //check the right diagonal of board is it safe for queen
+   x=i;
+   y=j;
+   while(x>=0&&y<n){
+       if(board[x][y]==1)return false;
+       x--;
+       y++;
+   }
+   //check every postion now queen is safe to place the ith and jth positon
+   return true;
+}
+bool SolveNqueen(int board[][10],int i,int n){
+    //base case
+    if(i==n){
+        //we find the way to place N queen in board
+      for(int i=0;i<n;i++){
+          for(int j=0;j<n;j++){
+              if(board[i][j]==1) cout<<"Q ";
+              else cout<<"_ ";
+          }
+          cout<<endl;
+      }
+      //if true return then it print only possible way to place the queen //return true;
+      //if false return then it backtrack the board and print all possible way to print the 
+     // queen place on board
+     cout<<endl<<endl;
+     return false;
+    }
+      //Rec case
+      //check queen is safe for every position of row
+      for(int j=0;j<n;j++){
+          //check every col of current row
+        if(IsBoardSafe(board,i,j,n)){
+            board[i][j]=1;
+            //Here we assume i and j are safe to place queen
+            //this is safe position go to next row and check is their any postition 
+            //is safe to place on board;
+              bool nextPosition=SolveNqueen(board,i+1,n);
+              //if yes then its mean theirs is way to place queen safely
+              if(nextPosition){
+                  return true;
+              }
+        // Assumption is gone wrong i and j positon is not good to place Queen 
+        //so we need to move back and remove queen where we place queen and
+        //this is called backtracing
+        board[i][j]=0;
+        }
+      }
+    //try all row there is not possible postion to place queen
+    return false;
+}
+int main() {
+ int n;
+ cin>>n;
+ int board[10][10]={0};
+  bool ans=SolveNqueen(board,0,n);
+ cout<<ans<<endl;
+}

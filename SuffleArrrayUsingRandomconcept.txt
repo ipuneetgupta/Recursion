@@ -1,0 +1,44 @@
+#include <iostream>
+#include<cstdlib>
+using namespace std;
+void ShuffleArray(int *arr,int s,int e){
+    srand(time(NULL));
+     int i;
+     for(int j=e;j<0;j--){
+         i=rand()%(j+1);
+         swap(arr[i],arr[j]);
+     }
+     return;
+}
+int Partition(int *arr,int s,int e){
+    int i=s-1;
+    int j=s;
+    int pivot=arr[e];
+    for(;j<=e-1;j++){
+        if(arr[j]<=pivot){
+            i++;
+            swap(arr[i],arr[j]);
+        }
+    }
+    swap(arr[i+1],arr[e]);
+    return (i+1);
+}
+void QuickSort(int *arr,int s,int e){
+    if(s>=e) return ;
+    int p=Partition(arr,s,e);
+    QuickSort(arr,s,p-1);
+    QuickSort(arr,p+1,e);
+    return;
+}
+int main() {
+  int n;
+  cin>>n;
+  int arr[n];
+  for(int i=0;i<n;i++) cin>>arr[i];
+  ShuffleArray(arr,0,n-1);
+  for(int i=0;i<n;i++) cout<<arr[i]<<" ";
+  cout<<endl;
+  QuickSort(arr,0,n-1);
+    for(int i=0;i<n;i++) cout<<arr[i]<<" ";
+
+}

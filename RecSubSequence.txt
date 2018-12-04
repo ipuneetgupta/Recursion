@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+int p=0;
+void SubSequence(string str,string result){
+    if(str==""){
+        cout<<result<<" ";
+        p++;
+        return;
+    }
+    char c=str[0];
+    string ros=str.substr(1);
+    SubSequence(ros,result);
+    SubSequence(ros,result+c);
+    return ;
+}
+int main() {
+    string str;
+    cin>>str;
+    cout<<(1<<str.size())<<endl;
+    SubSequence(str,"");
+}

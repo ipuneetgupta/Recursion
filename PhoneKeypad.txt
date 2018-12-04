@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+char keySpell[][10]={"","","ABC","DEF","GHI","JKL","MNO","PQRS","TUV","WXYZ"};
+void PrintKeyPad(char *inp,char *out,int i,int j){
+    //base case
+    if(inp[i]=='\0'){
+        out[j]='\0';
+        cout<<out<<" ";
+        return;
+    }
+    int digit=inp[i]-'0';
+    if(digit==0||digit==1){
+        PrintKeyPad(inp,out,i+1,j);
+    }
+    int k=0;
+    for(;keySpell[digit][k]!='\0';k++){
+       out[j]=keySpell[digit][k];
+       PrintKeyPad(inp,out,i+1,j+1);
+    }
+    return;
+}
+int main() {
+   char inp[100];
+   char out[100];
+   cin>>inp;
+   PrintKeyPad(inp,out,0,0);
+}

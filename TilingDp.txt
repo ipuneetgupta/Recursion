@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+#define mod 1000000007
+#define ll long long 
+ll Tiling_Dp(ll n,ll m){
+   ll arr[n+1]={0};
+   arr[0]=0;
+   for(int i=1;i<=n;i++){
+       //if i>m then tile may be put vertical and horizontal
+       if(i>m) (arr[i]=arr[i-1]+arr[i-m])%mod;
+       // ifi==m means that one we put all tile verical
+       // or two we put all tile in horizontal direction
+       //eg=if 8*4 or 1*4 in this when grid size become
+       //4 or 8 then 2 possible way
+       else if(i==m) arr[i]=2;
+       //when i<m this mean we put tile mix vertical and 
+       //horizontal positon this pattern only 1 possible
+       else arr[i]=1;
+
+   }
+   return arr[n];
+}
+int main() {
+    int t;
+    cin>>t;
+    while(t--){
+        int n,m;
+        cin>>n>>m;
+        cout<<Tiling_Dp(n,m)<<endl;
+    }
+}

@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+#define mod 1000000007
+#define ll long long
+ll tilling( ll n,ll m){
+    if(n-m==0) return 2;
+    if(n-m<0) return 1;
+    cout<<n<<endl;
+    //Tile place vertically
+    ll f1=tilling(n-1,m);
+    cout<<endl;
+    cout<<"   0000000000000000000000000     "<<endl;;
+        cout<<n<<endl;
+        //Tile place horizontally
+    ll f2=tilling(n-m,m);
+    cout<<f1+f2<<"--->ans"<<endl;
+    return (f1+f2)%mod;
+}
+int main() {
+    int t;
+    cin>>t;
+    while(t--){
+        int n,m;
+        cin>>n>>m;
+    cout<<tilling(n,m)<<endl;
+    }
+}
