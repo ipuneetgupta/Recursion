@@ -1,0 +1,28 @@
+def PartionIndex(arr, i, j):
+     B = i - 1
+     pivot = arr[j]
+     for s in range(i, j):
+         if arr[s] <= pivot:
+             B = B + 1
+             arr[B], arr[s] = arr[s], arr[B]
+     arr[B + 1], arr[j] = arr[j], arr[B + 1]
+     return (B + 1)
+
+
+def Quicksort(arr, i, j):
+     if i >= j:
+       return
+     P_idx = PartionIndex(arr, i, j)
+
+     Quicksort(arr, i, P_idx - 1)
+     Quicksort(arr, P_idx + 1, j)
+
+
+
+
+arr = [2, 8, 1, 6, 7]
+n = len(arr)
+Quicksort(arr, 0, n - 1)
+
+for i in range(0, n - 1):
+    print(arr[i])
