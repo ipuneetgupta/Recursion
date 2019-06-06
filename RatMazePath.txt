@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+char Maze[1003][1003]={0};
+int soln[1003][1003]={0};
+void print(int n,int m){
+  for(int i=1;i<=n;i++){
+      for(int j=1;j<=m;j++){
+          cout<<soln[i][j]<<" ";
+      }
+      cout<<endl;
+  }
+}
+bool RatMazePath(int i,int j,int n,int m){
+    //base case
+    if(i==n&&j==m) {
+        soln[i][j]=1;
+        print(n,m);
+        soln[i][j]=0;
+        return true;
+    }
+    //base case
+    if(i>n||j>m) return false;
+    if(Maze[i][j]=='X') return false;
+    soln[i][j]=1;
+    bool a1= RatMazePath(i+1,j,n,m);
+    if(a1) return true;
+    bool a2=RatMazePath(i,j+1,n,m);
+    if(a2) return true;
+    //backtrace
+    soln[i][j]=0;
+    return false;
+}
+int main() {
+    int n,m;
+    cin>>n>>m;
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=m;j++){
+            cin>>Maze[i][j];
+        }
+    }
+    RatMazePath(1,1,n,m);
+}

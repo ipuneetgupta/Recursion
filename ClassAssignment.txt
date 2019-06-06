@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+int ClassAssign(int n,string str){
+//base case
+  if(n==0) return 1;
+  int ans3=0;
+  if(str[str.size()-1]!='b'){
+    //  cout<<str+"b"<<endl;
+      ans3=ClassAssign(n-1,str+"b");
+  }
+ // cout<<str+"a"<<endl;
+  int ans1=ClassAssign(n-1,str+"a");
+  return (ans3+ans1);
+}
+
+//                    fibonacci series
+// int t;
+// 	cin>>t;
+// 	long long arr[45];
+// 	arr[1]=2;
+// 	arr[2]=3;
+// 	for(int i=3;i<45;i++)
+// 	{
+// 		arr[i]=arr[i-1]+arr[i-2];
+// 	}
+//     int c=1;
+// 	while(t--)
+// 	{
+// 		int n;
+// 		cin>>n;
+// 		// string temp="";
+// 		// number(0,n,temp);
+// 	 cout<<"#"<<c<<" : "<<arr[n]<<endl;
+//      c++;
+// 	}
+
+
+int main() {
+    int t;
+    cin>>t;
+    int c=1;
+    while(t--){
+        int n;
+        cin>>n;
+        cout<<"#"<<c<<" : "<<ClassAssign(n," ")<<endl;
+        c++;
+
+    }
+}

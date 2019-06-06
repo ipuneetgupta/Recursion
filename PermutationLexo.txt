@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+string perm[10000];
+int pr_i=0;
+void Perm_Dic_Ord(string rec,string ck,int i,int j){
+    //base case
+    if(i>j-1){
+        if(rec>ck){
+            perm[pr_i]=rec;
+            pr_i++;
+        }
+    }
+    
+    //find permutation
+    for(int p=i;p<j;p++){
+        
+        swap(rec[p],rec[i]);
+        Perm_Dic_Ord(rec,ck,i+1,j);
+    }
+    return;
+}
+int main() {
+    string str;
+    cin>>str;
+    Perm_Dic_Ord(str,str,0,str.size());
+    for(int i=0;i<pr_i;i++){
+        cout<<perm[i]<<endl;
+    }
+}
